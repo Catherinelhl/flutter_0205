@@ -4,18 +4,21 @@ import 'package:flutter_0205/page/home.dart';
 import 'package:flutter_0205/page/my.dart';
 
 class TabNavigator extends StatefulWidget {
-
   @override
   _TabNavigatorState createState() => new _TabNavigatorState();
 }
 
 class _TabNavigatorState extends State<TabNavigator> {
   int _currentIndex = 0;
-  List<Widget> bodyList = [HomePage(), BoostPage(), MyPage()];
-  List<String> titleList =["首页","加速","我的"];
+  final List<Widget> bodyList = [HomePage(), BoostPage(), MyPage()];
+  final List<String> titleList = ["首页", "加速", "我的"];
 
+  final int redColor = 0xeeee0000;
+  final int greyColor = 0xee999999;
 
-  Color _changeIconState(int position) =>Color(_currentIndex == position?0xeeee0000 : 0xee999999);
+  Color _changeIconState(int position) =>
+      Color(_currentIndex == position ? redColor : greyColor);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,8 +28,9 @@ class _TabNavigatorState extends State<TabNavigator> {
         title: Text(titleList[_currentIndex]),
       ),
       body: bodyList[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
               color: _changeIconState(0),
@@ -35,33 +39,33 @@ class _TabNavigatorState extends State<TabNavigator> {
               titleList[0],
               style: TextStyle(color: _changeIconState(0)),
             ),
-        ),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.email,
-              color: _changeIconState(1),
-            ),
-            title: Text(
-              titleList[1],
-              style: TextStyle(color: _changeIconState(1)),
-            )),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.airplay,
-              color: _changeIconState(2),
-            ),
-            title: Text(
-              titleList[2],
-              style: TextStyle(color: _changeIconState(2)),
-            ))
-      ],
-      currentIndex: _currentIndex,
-      onTap: (int index){
-        setState(() {
-          _currentIndex = index;
-
-        });
-      },),
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.email,
+                color: _changeIconState(1),
+              ),
+              title: Text(
+                titleList[1],
+                style: TextStyle(color: _changeIconState(1)),
+              )),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.airplay,
+                color: _changeIconState(2),
+              ),
+              title: Text(
+                titleList[2],
+                style: TextStyle(color: _changeIconState(2)),
+              ))
+        ],
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 }
